@@ -5,7 +5,7 @@
 # Classes points
 
 * ## Flask (Intro) - ✅
-* ## Pydantic (Intro)
+* ## Pydantic (Intro) - ✅
 * ## SQLAlchemy (Intro)
 * ## SQLAlchemy (queries)
 * ## Flask (working with project part 1)
