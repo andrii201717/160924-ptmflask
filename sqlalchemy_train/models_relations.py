@@ -38,6 +38,7 @@ class User(Base):
         back_populates="user",
         uselist=False
     )
+    project_associations: Mapped['ProjectsToUsers'] = relationship("ProjectsToUsers", back_populates="user")
 
 
 class ProjectsToUsers(Base):
@@ -53,6 +54,9 @@ class ProjectsToUsers(Base):
         primary_key=True
     )
 
+    user: Mapped['User'] = relationship("User", back_populates="project_associations")
+    project: Mapped['Project'] = relationship("Project", back_populates="user_associations")
+
 
 # M2M
 class Project(Base):
@@ -64,6 +68,8 @@ class Project(Base):
     name: Mapped[str] = mapped_column(
         String(40)
     )
+
+    user_associations: Mapped['ProjectsToUsers'] = relationship("ProjectsToUsers", back_populates="project")
 
 
 class Address(Base):

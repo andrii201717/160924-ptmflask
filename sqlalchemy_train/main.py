@@ -16,16 +16,21 @@ from sqlalchemy_train import engine
 
 
 with DBConnection(engine) as session:
-    user = User(id=1, name='Julia', surname="Black")
-    project = Project(id=1, name='First Project')
+    # user = User(id=1, name='Julia', surname="Black")
+    # project = Project(id=1, name='First Project')
 
-    proj_2_us = ProjectsToUsers(user.id, project.id)
-    session.add(user)
-    session.add(project)
-    session.add(proj_2_us)
+    # proj_2_us = ProjectsToUsers(user.id, project.id)
+    # session.add(user)
+    # session.add(project)
+    # session.add(proj_2_us)
 
     # TODO: добавить альтернативный вариант записи объектов
 
-    # session.add_all(users)
+    # >>
+    user = User(id=2, name='Julia', surname="Black")
+    project = Project(id=2, name='Second Project')
+    users2_projects = ProjectsToUsers(user=user, project=project)
+
+    session.add(users2_projects)
     session.commit()
 
