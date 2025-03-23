@@ -48,7 +48,7 @@ class User(Base):
     )
     first_name: Mapped[str] = mapped_column(String(25))
     last_name: Mapped[str] = mapped_column(String(75))
-    email: Mapped[str] = mapped_column(String(75), index=True)
+    email: Mapped[str] = mapped_column(String(75), index=True, unique=True)
     password: Mapped[str] = mapped_column(String(255))
     phone: Mapped[str | None] = mapped_column(String(30), nullable=True)
     role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id", ondelete="CASCADE"))
