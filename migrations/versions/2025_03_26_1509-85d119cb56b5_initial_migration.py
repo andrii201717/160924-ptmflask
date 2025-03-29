@@ -17,12 +17,12 @@ depends_on = None
 
 def upgrade():
     op.create_table('questions',
-    sa.Column('id', sa.Integer(), sa.Identity(always=True), autoincrement=True, nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('text', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('answers',
-    sa.Column('id', sa.Integer(), sa.Identity(always=True), autoincrement=True, nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('question_id', sa.Integer(), nullable=False),
     sa.Column('is_agree', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['question_id'], ['questions.id'], ),

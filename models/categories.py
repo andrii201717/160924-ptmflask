@@ -8,20 +8,11 @@ class Category(db.Model):
 
     id: Mapped[int] = mapped_column(
         db.Integer,
-        primary_key=True,  # index=True, unique=True
+        primary_key=True,
         autoincrement=True
     )
     name: Mapped[str] = mapped_column(
-        db.String(40)
+        db.String(30)
     )
 
-    questions: Mapped[list['Question']] = db.relationship(
-        'Question',
-        back_populates='category'
-    )
-
-    def __repr__(self):
-        return "Category(id={}, name={})".format(
-            self.id,
-            self.name
-        )
+    questions: Mapped['Question'] = db.relationship('Question', back_populates='category')

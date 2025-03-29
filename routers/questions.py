@@ -45,15 +45,17 @@ def questions_list() -> Response | tuple[Response, int]:
         data = request.json
 
         try:
-            new_question = create_new_question(raw_data=data)
+            question = create_new_question(row_data=data)
         except ValidationError as err:
             return jsonify(err.errors()), 400
+
         return jsonify(
             QuestionResponse(
-                id=new_question.id,
-                text=new_question.text
+                id=question.id,
+                text=question.text,
+                category_id=question.category_id
             ).model_dump()
-        ), 201  # CREATED
+        ), 201
 
 
 # request.args => { "agree_count": True }

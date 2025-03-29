@@ -1,7 +1,7 @@
 from models.questions import Question
-
 from models import db
 from schemas.questions import QuestionCreate, QuestionResponse
+from controllers.categories import get_category_by_id
 
 
 def get_all_questions() -> list[dict[str, int | str]]:
@@ -21,15 +21,17 @@ def get_question_by_id(id_: int) -> Question | None:
     return question
 
 
-def create_new_question(raw_data: dict[str, str]) -> Question:
-    validated_obj = QuestionCreate.model_validate(raw_data)
+def create_new_question(row_data: dict[str, str | int]) -> Question:
+    question_obj = QuestionCreate.model_validate(row_data).model_dump()
 
-    new_obj = Question(text=validated_obj.text)
+    get_category_by_id(question_obj["category_id"])
 
-    db.session.add(new_obj)
+    question = Question(**question_obj)
+
+    db.session.add(question)
     db.session.commit()
 
-    return new_obj
+    return question
 
 
 def update_question(entity: Question, row_data: dict[str, str]) -> Question:
